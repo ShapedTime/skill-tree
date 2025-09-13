@@ -18,7 +18,13 @@
       "Bash(gh pr create:*)",
       "Bash(tree:*)",
       "Bash(docker-compose up:*)",
-      "Bash(docker-compose:*)"
+      "Bash(docker-compose:*)",
+      "Bash(gh pr view:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run:*)",
+      "Bash(tsx test-database.ts:*)",
+      "Bash(npx tsx:*)"
     ],
     "deny": [],
     "ask": []

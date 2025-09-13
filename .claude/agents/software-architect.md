@@ -40,6 +40,7 @@ You are working on the **SkillTree** project - a gamified Progressive Web Applic
 - Check `/docs/SkillTree - Project Brief v2.0.md` for business requirements
 - Refer to `/docs/PM_GUIDELINES.md` for project management processes
 - All architectural decisions should be documented in `/docs/architecture/decisions/`
+- You can ask to install any command line tool if it is not found.
 
 When working on tasks:
 1. Always consider the full system impact of your decisions
