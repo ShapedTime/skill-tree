@@ -6,36 +6,12 @@ const prisma = new PrismaClient()
 async function main() {
   console.log('🌱 Starting database seed...')
 
-  // Create skill categories
-  const programmingCategory = await prisma.skillCategory.create({
-    data: {
-      name: 'Programming',
-      slug: 'programming',
-      description: 'Software development and programming languages',
-      color: '#3B82F6',
-      icon: 'code',
-      sortOrder: 1,
-    }
-  })
-
-  const webDevCategory = await prisma.skillCategory.create({
-    data: {
-      name: 'Web Development',
-      slug: 'web-development',
-      description: 'Frontend and backend web technologies',
-      color: '#10B981',
-      icon: 'globe',
-      sortOrder: 2,
-    }
-  })
-
   // Create sample skill tree
   const frontendTree = await prisma.skillTree.create({
     data: {
-      categoryId: webDevCategory.id,
       name: 'Frontend Web Development',
       slug: 'frontend-web-development',
-      description: 'Complete guide to modern frontend development',
+      description: 'Complete guide to modern frontend development with HTML, CSS, JavaScript, and React',
       shortDescription: 'Learn HTML, CSS, JavaScript, and React',
       difficulty: 'BEGINNER',
       estimatedHours: 120,
@@ -50,26 +26,18 @@ async function main() {
     }
   })
 
-  // Create interconnected skills
+  // Create interconnected skills with simplified structure
   const htmlSkill = await prisma.skill.create({
     data: {
       skillTreeId: frontendTree.id,
       name: 'HTML Fundamentals',
-      shortName: 'HTML',
-      description: 'Learn the building blocks of web pages',
-      learningObjectives: [
-        'Understand HTML document structure',
-        'Create semantic markup',
-        'Use forms and input elements'
-      ],
-      skillType: 'KNOWLEDGE',
+      description: 'Learn the building blocks of web pages with semantic markup and forms',
       difficulty: 'BEGINNER',
       estimatedMinutes: 300,
       xpValue: 50,
-      dependencies: [],
+      dependencies: [], // No prerequisites - starting skill
       positionX: 0,
       positionY: 0,
-      nodeSize: 1,
       isActive: true,
       isMilestone: true,
       content: {
@@ -96,21 +64,13 @@ async function main() {
     data: {
       skillTreeId: frontendTree.id,
       name: 'CSS Styling',
-      shortName: 'CSS',
-      description: 'Style and layout web pages',
-      learningObjectives: [
-        'Apply CSS selectors and properties',
-        'Create responsive layouts',
-        'Use Flexbox and Grid'
-      ],
-      skillType: 'PRACTICAL',
+      description: 'Style and layout web pages with CSS, including Flexbox and Grid',
       difficulty: 'BEGINNER',
       estimatedMinutes: 480,
       xpValue: 75,
-      dependencies: [htmlSkill.id],
+      dependencies: [htmlSkill.id], // Depends on HTML
       positionX: 200,
       positionY: 0,
-      nodeSize: 2,
       isActive: true,
       content: {
         type: 'structured',
@@ -118,21 +78,50 @@ async function main() {
           {
             title: 'CSS Fundamentals',
             type: 'interactive',
-            estimatedMinutes: 90,
-            resources: []
+            estimatedMinutes: 90
+          },
+          {
+            title: 'Layout with Flexbox',
+            type: 'practical',
+            estimatedMinutes: 120
           }
         ]
       }
     }
   })
 
-  // Update dependents
-  await prisma.skill.update({
-    where: { id: htmlSkill.id },
-    data: { dependents: [cssSkill.id] }
+  const jsSkill = await prisma.skill.create({
+    data: {
+      skillTreeId: frontendTree.id,
+      name: 'JavaScript Basics',
+      description: 'Learn JavaScript fundamentals including variables, functions, and DOM manipulation',
+      difficulty: 'INTERMEDIATE',
+      estimatedMinutes: 600,
+      xpValue: 100,
+      dependencies: [htmlSkill.id, cssSkill.id], // Depends on both HTML and CSS
+      positionX: 400,
+      positionY: 0,
+      isActive: true,
+      isMilestone: true,
+      content: {
+        type: 'structured',
+        modules: [
+          {
+            title: 'JavaScript Syntax',
+            type: 'interactive',
+            estimatedMinutes: 180
+          },
+          {
+            title: 'DOM Manipulation',
+            type: 'practical',
+            estimatedMinutes: 240
+          }
+        ]
+      }
+    }
   })
 
-  // Create sample user
+  // Create sample user with embedded profile data
   const testUser = await prisma.user.create({
     data: {
       email: 'test@skillTree.dev',
@@ -140,47 +129,60 @@ async function main() {
       passwordHash: await hash('password123', 10),
       firstName: 'Test',
       lastName: 'User',
+      bio: 'Learning frontend development to build amazing web applications',
+      timezone: 'UTC',
+      totalXp: 0,
+      currentLevel: 1,
       isActive: true,
       emailVerified: true,
     }
   })
 
-  // Create user profile
-  await prisma.userProfile.create({
+  // Create sample progress entries
+  await prisma.userSkillProgress.create({
     data: {
       userId: testUser.id,
-      bio: 'Learning frontend development',
-      timezone: 'UTC',
-      learningGoals: ['Learn React', 'Build portfolio'],
-      interests: ['web development', 'design'],
-      totalXp: 0,
-      currentLevel: 1,
+      skillId: htmlSkill.id,
+      skillTreeId: frontendTree.id,
+      status: 'COMPLETED',
+      progressPercent: 100,
+      timeSpentMinutes: 250,
+      completionScore: 95,
+      startedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
+      completedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000), // 5 days ago
+      lastActivityAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
     }
   })
 
-  // Create sample achievements
-  const firstSkillAchievement = await prisma.achievement.create({
+  await prisma.userSkillProgress.create({
     data: {
-      name: 'First Steps',
-      description: 'Complete your first skill',
-      category: 'PROGRESS',
-      criteria: {
-        type: 'skill_completion_count',
-        threshold: 1
-      },
-      xpReward: 25,
-      badgeIcon: 'trophy',
-      badgeColor: '#F59E0B',
-      rarity: 'COMMON'
+      userId: testUser.id,
+      skillId: cssSkill.id,
+      skillTreeId: frontendTree.id,
+      status: 'IN_PROGRESS',
+      progressPercent: 60,
+      timeSpentMinutes: 180,
+      startedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000), // 3 days ago
+      lastActivityAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000), // 1 day ago
+    }
+  })
+
+  await prisma.userSkillProgress.create({
+    data: {
+      userId: testUser.id,
+      skillId: jsSkill.id,
+      skillTreeId: frontendTree.id,
+      status: 'AVAILABLE', // Available since CSS is in progress (not completed yet)
+      progressPercent: 0,
+      timeSpentMinutes: 0,
     }
   })
 
   console.log('✅ Database seeded successfully!')
-  console.log(`Created categories: ${programmingCategory.name}, ${webDevCategory.name}`)
   console.log(`Created skill tree: ${frontendTree.name}`)
-  console.log(`Created skills: ${htmlSkill.name}, ${cssSkill.name}`)
-  console.log(`Created user: ${testUser.email}`)
-  console.log(`Created achievement: ${firstSkillAchievement.name}`)
+  console.log(`Created skills: ${htmlSkill.name}, ${cssSkill.name}, ${jsSkill.name}`)
+  console.log(`Created user: ${testUser.email} with embedded profile`)
+  console.log(`Created progress entries for skill tree learning path`)
 }
 
 main()

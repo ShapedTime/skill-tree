@@ -9,365 +9,156 @@ datasource db {
 }
 
 // =====================================
-// USER MANAGEMENT & AUTHENTICATION
+// SIMPLIFIED MVP SCHEMA - 4 MODELS
 // =====================================
 
+// User model with embedded profile data
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  username      String    @unique @db.VarChar(50)
-  passwordHash  String
-  firstName     String?   @db.VarChar(100)
-  lastName      String?   @db.VarChar(100)
-  avatarUrl     String?
+  id           String @id @default(cuid())
+  email        String @unique
+  username     String @unique @db.VarChar(50)
+  passwordHash String
+
+  // Basic profile information
+  firstName String? @db.VarChar(100)
+  lastName  String? @db.VarChar(100)
+  avatarUrl String?
+  bio       String? @db.Text
+  timezone  String? @default("UTC")
+
+  // Gamification (embedded from UserProfile)
+  totalXp      Int @default(0)
+  currentLevel Int @default(1)
+
+  // Status flags
   isActive      Boolean   @default(true)
   emailVerified Boolean   @default(false)
   lastLoginAt   DateTime?
 
   // Relationships
-  skillTreeProgress UserSkillTreeProgress[]
-  skillProgress     UserSkillProgress[]
-  achievements      UserAchievement[]
-  sessions          UserSession[]
-  profile           UserProfile?
+  skillProgress UserSkillProgress[]
 
   // Audit fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  createdBy String?
-  updatedBy String?
 
   @@index([email], name: "idx_user_email")
   @@index([username], name: "idx_user_username")
-  @@index([isActive, lastLoginAt], name: "idx_user_activity")
   @@map("users")
 }
 
-model UserProfile {
-  userId        String   @id
-  bio           String?  @db.Text
-  location      String?  @db.VarChar(200)
-  website       String?
-  timezone      String?  @default("UTC")
-  learningGoals String[]
-  interests     String[]
-  preferences   Json     @default("{}")
-
-  // Gamification
-  totalXp        Int       @default(0)
-  currentLevel   Int       @default(1)
-  currentStreak  Int       @default(0)
-  maxStreak      Int       @default(0)
-  lastActivityAt DateTime?
-
-  // Statistics
-  skillsCompleted Int   @default(0)
-  hoursLearned    Float @default(0)
-  treesStarted    Int   @default(0)
-  treesCompleted  Int   @default(0)
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([totalXp], name: "idx_profile_xp")
-  @@index([currentLevel], name: "idx_profile_level")
-  @@index([lastActivityAt], name: "idx_profile_activity")
-  @@map("user_profiles")
-}
-
-// =====================================
-// SKILL TREE ARCHITECTURE
-// =====================================
-
-model SkillCategory {
-  id          String  @id @default(cuid())
-  name        String  @unique @db.VarChar(100)
-  slug        String  @unique @db.VarChar(100)
-  description String? @db.Text
-  color       String? @db.VarChar(7) // Hex color code
-  icon        String? @db.VarChar(100)
-  sortOrder   Int     @default(0)
-  isActive    Boolean @default(true)
-
-  skillTrees SkillTree[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([slug], name: "idx_category_slug")
-  @@index([sortOrder], name: "idx_category_sort")
-  @@map("skill_categories")
-}
-
+// Skill Tree model (simplified)
 model SkillTree {
   id               String  @id @default(cuid())
-  categoryId       String
   name             String  @db.VarChar(200)
   slug             String  @unique @db.VarChar(200)
   description      String? @db.Text
   shortDescription String? @db.VarChar(300)
 
-  // Metadata and configuration
+  // Metadata
   difficulty     DifficultyLevel @default(BEGINNER)
   estimatedHours Float?
-  prerequisites  String[] // Array of other skill tree IDs
   tags           String[]
-  version        String          @default("1.0.0")
 
-  // Visual configuration
+  // Visual configuration (simplified)
   layoutConfig Json @default("{}")
-  themeConfig  Json @default("{}")
-
-  // Content flags
-  isPublished   Boolean @default(false)
-  isFeatured    Boolean @default(false)
-  isAiGenerated Boolean @default(false)
-
-  // Relationships
-  category     SkillCategory           @relation(fields: [categoryId], references: [id])
-  skills       Skill[]
-  userProgress UserSkillTreeProgress[]
-
-  // Audit fields
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  createdBy String?
-  updatedBy String?
-
-  @@index([categoryId, isPublished], name: "idx_tree_category_published")
-  @@index([slug], name: "idx_tree_slug")
-  @@index([difficulty, isPublished], name: "idx_tree_difficulty")
-  @@index([tags], type: Gin, name: "idx_tree_tags")
-  @@index([prerequisites], type: Gin, name: "idx_tree_prerequisites")
-  @@index([name], name: "idx_skill_tree_name")
-  @@index([description], name: "idx_skill_tree_description")
-  @@map("skill_trees")
-}
-
-model Skill {
-  id            String  @id @default(cuid())
-  skillTreeId   String
-  parentSkillId String? // For hierarchical skills within a tree
-
-  // Core skill data
-  name               String   @db.VarChar(200)
-  shortName          String?  @db.VarChar(50)
-  description        String?  @db.Text
-  learningObjectives String[]
-
-  // Skill type and metadata
-  skillType        SkillType       @default(KNOWLEDGE)
-  difficulty       DifficultyLevel @default(BEGINNER)
-  estimatedMinutes Int?
-  xpValue          Int             @default(10)
-
-  // Dependencies (graph relationships)
-  dependencies String[] // Array of skill IDs (immediate prerequisites)
-  dependents   String[] // Array of skill IDs (skills that depend on this)
-
-  // Visual positioning
-  positionX Float @default(0)
-  positionY Float @default(0)
-  nodeSize  Int   @default(1) // 1=small, 2=medium, 3=large
-
-  // Content and resources
-  content     Json? // Rich content structure
-  resources   Json? // External links, videos, etc.
-  assessments Json? // Quiz/assessment data
 
   // Status flags
-  isActive    Boolean @default(true)
-  isOptional  Boolean @default(false)
-  isMilestone Boolean @default(false)
+  isPublished Boolean @default(false)
+  isFeatured  Boolean @default(false)
 
   // Relationships
-  skillTree    SkillTree           @relation(fields: [skillTreeId], references: [id], onDelete: Cascade)
-  parentSkill  Skill?              @relation("SkillHierarchy", fields: [parentSkillId], references: [id])
-  childSkills  Skill[]             @relation("SkillHierarchy")
+  skills       Skill[]
   userProgress UserSkillProgress[]
 
   // Audit fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  createdBy String?
-  updatedBy String?
 
-  @@index([skillTreeId, isActive], name: "idx_skill_tree_active")
-  @@index([parentSkillId], name: "idx_skill_parent")
-  @@index([dependencies], type: Gin, name: "idx_skill_dependencies")
-  @@index([dependents], type: Gin, name: "idx_skill_dependents")
-  @@index([skillType, difficulty], name: "idx_skill_type_difficulty")
-  @@index([positionX, positionY], name: "idx_skill_position")
-  @@index([isMilestone, isActive], name: "idx_skill_milestones")
-  @@index([name], name: "idx_skill_name")
-  @@index([description], name: "idx_skill_description")
-  @@map("skills")
+  @@index([slug], name: "idx_tree_slug")
+  @@index([isPublished], name: "idx_tree_published")
+  @@map("skill_trees")
 }
 
-// =====================================
-// PROGRESS TRACKING
-// =====================================
-
-model UserSkillTreeProgress {
+// Skill model (simplified with dependency array)
+model Skill {
   id          String @id @default(cuid())
-  userId      String
   skillTreeId String
 
-  // Progress metrics
-  status          TreeProgressStatus @default(NOT_STARTED)
-  progressPercent Float              @default(0) // 0.0 to 100.0
-  skillsCompleted Int                @default(0)
-  totalSkills     Int                @default(0)
+  // Core skill data
+  name        String  @db.VarChar(200)
+  description String? @db.Text
 
-  // Time tracking
-  timeSpentMinutes Int       @default(0)
-  startedAt        DateTime?
-  lastActivityAt   DateTime?
-  completedAt      DateTime?
+  // Skill metadata
+  difficulty       DifficultyLevel @default(BEGINNER)
+  estimatedMinutes Int?
+  xpValue          Int             @default(10)
 
-  // Milestones and achievements
-  milestonesReached String[] // Array of milestone skill IDs
-  currentPath       String[] // Array of skill IDs representing learning path
+  // Simple dependency management
+  dependencies String[] // Array of skill IDs that must be completed first
+
+  // Visual positioning
+  positionX Float @default(0)
+  positionY Float @default(0)
+
+  // Content (simplified)
+  content Json? // Rich content structure
+
+  // Status flags
+  isActive    Boolean @default(true)
+  isMilestone Boolean @default(false)
 
   // Relationships
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skillTree SkillTree @relation(fields: [skillTreeId], references: [id], onDelete: Cascade)
+  skillTree    SkillTree           @relation(fields: [skillTreeId], references: [id], onDelete: Cascade)
+  userProgress UserSkillProgress[]
 
+  // Audit fields
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([userId, skillTreeId], name: "unique_user_tree_progress")
-  @@index([userId, status], name: "idx_user_tree_status")
-  @@index([skillTreeId, status], name: "idx_tree_user_status")
-  @@index([lastActivityAt], name: "idx_tree_progress_activity")
-  @@map("user_skill_tree_progress")
+  @@index([skillTreeId, isActive], name: "idx_skill_tree_active")
+  @@index([dependencies], type: Gin, name: "idx_skill_dependencies")
+  @@map("skills")
 }
 
+// User progress tracking (simplified)
 model UserSkillProgress {
   id          String @id @default(cuid())
   userId      String
   skillId     String
   skillTreeId String // Denormalized for performance
 
-  // Core progress data
+  // Progress data
   status          SkillProgressStatus @default(LOCKED)
   progressPercent Float               @default(0) // 0.0 to 100.0
 
   // Time tracking
   timeSpentMinutes Int @default(0)
-  attemptsCount    Int @default(0)
 
   // Completion data
-  completionMethod CompletionMethod?
-  completionScore  Float? // For assessed skills
-  evidenceData     Json? // Proof of completion
+  completionScore Float? // For assessed skills
 
   // Timestamps
-  unlockedAt     DateTime?
   startedAt      DateTime?
-  lastActivityAt DateTime?
   completedAt    DateTime?
-
-  // Learning analytics
-  strugglingIndicators Json? // Analytics for learning difficulty
-  engagementScore      Float? // 0.0 to 1.0 engagement metric
+  lastActivityAt DateTime?
 
   // Relationships
-  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
-  skill Skill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill     Skill     @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  skillTree SkillTree @relation(fields: [skillTreeId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@unique([userId, skillId], name: "unique_user_skill_progress")
   @@index([userId, status], name: "idx_user_skill_status")
-  @@index([skillId, status], name: "idx_skill_user_status")
   @@index([skillTreeId, userId], name: "idx_tree_user_progress")
-  @@index([lastActivityAt], name: "idx_skill_progress_activity")
-  @@index([completedAt], map: "idx_skill_completion")
   @@map("user_skill_progress")
 }
 
 // =====================================
-// GAMIFICATION & ACHIEVEMENTS
-// =====================================
-
-model Achievement {
-  id          String              @id @default(cuid())
-  name        String              @db.VarChar(200)
-  description String              @db.Text
-  category    AchievementCategory @default(PROGRESS)
-
-  // Achievement criteria
-  criteria   Json // Flexible criteria definition
-  xpReward   Int     @default(0)
-  badgeIcon  String?
-  badgeColor String? @db.VarChar(7)
-
-  // Rarity and visibility
-  rarity    AchievementRarity @default(COMMON)
-  isVisible Boolean           @default(true)
-  isActive  Boolean           @default(true)
-
-  // Relationships
-  userAchievements UserAchievement[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  @@index([category, isActive], name: "idx_achievement_category")
-  @@index([rarity], name: "idx_achievement_rarity")
-  @@map("achievements")
-}
-
-model UserAchievement {
-  id            String @id @default(cuid())
-  userId        String
-  achievementId String
-
-  // Achievement completion data
-  earnedAt DateTime @default(now())
-  progress Float    @default(100) // For progressive achievements
-  metadata Json? // Context about how it was earned
-
-  // Relationships
-  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  achievement Achievement @relation(fields: [achievementId], references: [id], onDelete: Cascade)
-
-  @@unique([userId, achievementId], name: "unique_user_achievement")
-  @@index([userId, earnedAt], name: "idx_user_achievement_date")
-  @@index([achievementId], name: "idx_achievement_users")
-  @@map("user_achievements")
-}
-
-// =====================================
-// SESSION & ANALYTICS
-// =====================================
-
-model UserSession {
-  id         String  @id @default(cuid())
-  userId     String
-  deviceInfo Json? // Browser, OS, etc.
-  ipAddress  String? @db.Inet
-
-  // Session data
-  startedAt      DateTime  @default(now())
-  lastActivityAt DateTime  @default(now())
-  endedAt        DateTime?
-  isActive       Boolean   @default(true)
-
-  // Relationships
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@index([userId, isActive], name: "idx_user_session_active")
-  @@index([lastActivityAt], name: "idx_session_activity")
-  @@map("user_sessions")
-}
-
-// =====================================
-// ENUMS
+// ENUMS (Essential only)
 // =====================================
 
 enum DifficultyLevel {
@@ -377,49 +168,9 @@ enum DifficultyLevel {
   EXPERT
 }
 
-enum SkillType {
-  KNOWLEDGE // Theoretical understanding
-  PRACTICAL // Hands-on application
-  PROJECT // Applied project work
-  ASSESSMENT // Quiz or test
-  MILESTONE // Major achievement marker
-}
-
-enum TreeProgressStatus {
-  NOT_STARTED
-  IN_PROGRESS
-  COMPLETED
-  PAUSED
-}
-
 enum SkillProgressStatus {
   LOCKED // Prerequisites not met
   AVAILABLE // Can be started
   IN_PROGRESS // Currently working on
   COMPLETED // Successfully completed
-  SKIPPED // Optionally skipped
-}
-
-enum CompletionMethod {
-  MANUAL // User marked as complete
-  ASSESSMENT // Passed quiz/test
-  PROJECT // Submitted project
-  TIME_BASED // Spent required time
-  EXTERNAL // Verified externally
-}
-
-enum AchievementCategory {
-  PROGRESS // Skill completion milestones
-  STREAK // Consistency achievements
-  EXPLORATION // Trying new skill areas
-  MASTERY // Deep skill development
-  SOCIAL // Community engagement
-  TIME // Time-based achievements
-}
-
-enum AchievementRarity {
-  COMMON
-  UNCOMMON
-  RARE
-  LEGENDARY
 }

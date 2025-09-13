@@ -128,116 +128,47 @@ exports.Prisma.UserScalarFieldEnum = {
   firstName: 'firstName',
   lastName: 'lastName',
   avatarUrl: 'avatarUrl',
+  bio: 'bio',
+  timezone: 'timezone',
+  totalXp: 'totalXp',
+  currentLevel: 'currentLevel',
   isActive: 'isActive',
   emailVerified: 'emailVerified',
   lastLoginAt: 'lastLoginAt',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdBy: 'createdBy',
-  updatedBy: 'updatedBy'
-};
-
-exports.Prisma.UserProfileScalarFieldEnum = {
-  userId: 'userId',
-  bio: 'bio',
-  location: 'location',
-  website: 'website',
-  timezone: 'timezone',
-  learningGoals: 'learningGoals',
-  interests: 'interests',
-  preferences: 'preferences',
-  totalXp: 'totalXp',
-  currentLevel: 'currentLevel',
-  currentStreak: 'currentStreak',
-  maxStreak: 'maxStreak',
-  lastActivityAt: 'lastActivityAt',
-  skillsCompleted: 'skillsCompleted',
-  hoursLearned: 'hoursLearned',
-  treesStarted: 'treesStarted',
-  treesCompleted: 'treesCompleted',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.SkillCategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  description: 'description',
-  color: 'color',
-  icon: 'icon',
-  sortOrder: 'sortOrder',
-  isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SkillTreeScalarFieldEnum = {
   id: 'id',
-  categoryId: 'categoryId',
   name: 'name',
   slug: 'slug',
   description: 'description',
   shortDescription: 'shortDescription',
   difficulty: 'difficulty',
   estimatedHours: 'estimatedHours',
-  prerequisites: 'prerequisites',
   tags: 'tags',
-  version: 'version',
   layoutConfig: 'layoutConfig',
-  themeConfig: 'themeConfig',
   isPublished: 'isPublished',
   isFeatured: 'isFeatured',
-  isAiGenerated: 'isAiGenerated',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdBy: 'createdBy',
-  updatedBy: 'updatedBy'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SkillScalarFieldEnum = {
   id: 'id',
   skillTreeId: 'skillTreeId',
-  parentSkillId: 'parentSkillId',
   name: 'name',
-  shortName: 'shortName',
   description: 'description',
-  learningObjectives: 'learningObjectives',
-  skillType: 'skillType',
   difficulty: 'difficulty',
   estimatedMinutes: 'estimatedMinutes',
   xpValue: 'xpValue',
   dependencies: 'dependencies',
-  dependents: 'dependents',
   positionX: 'positionX',
   positionY: 'positionY',
-  nodeSize: 'nodeSize',
   content: 'content',
-  resources: 'resources',
-  assessments: 'assessments',
   isActive: 'isActive',
-  isOptional: 'isOptional',
   isMilestone: 'isMilestone',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  createdBy: 'createdBy',
-  updatedBy: 'updatedBy'
-};
-
-exports.Prisma.UserSkillTreeProgressScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  skillTreeId: 'skillTreeId',
-  status: 'status',
-  progressPercent: 'progressPercent',
-  skillsCompleted: 'skillsCompleted',
-  totalSkills: 'totalSkills',
-  timeSpentMinutes: 'timeSpentMinutes',
-  startedAt: 'startedAt',
-  lastActivityAt: 'lastActivityAt',
-  completedAt: 'completedAt',
-  milestonesReached: 'milestonesReached',
-  currentPath: 'currentPath',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -250,54 +181,12 @@ exports.Prisma.UserSkillProgressScalarFieldEnum = {
   status: 'status',
   progressPercent: 'progressPercent',
   timeSpentMinutes: 'timeSpentMinutes',
-  attemptsCount: 'attemptsCount',
-  completionMethod: 'completionMethod',
   completionScore: 'completionScore',
-  evidenceData: 'evidenceData',
-  unlockedAt: 'unlockedAt',
   startedAt: 'startedAt',
-  lastActivityAt: 'lastActivityAt',
   completedAt: 'completedAt',
-  strugglingIndicators: 'strugglingIndicators',
-  engagementScore: 'engagementScore',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.AchievementScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  description: 'description',
-  category: 'category',
-  criteria: 'criteria',
-  xpReward: 'xpReward',
-  badgeIcon: 'badgeIcon',
-  badgeColor: 'badgeColor',
-  rarity: 'rarity',
-  isVisible: 'isVisible',
-  isActive: 'isActive',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.UserAchievementScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  achievementId: 'achievementId',
-  earnedAt: 'earnedAt',
-  progress: 'progress',
-  metadata: 'metadata'
-};
-
-exports.Prisma.UserSessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  deviceInfo: 'deviceInfo',
-  ipAddress: 'ipAddress',
-  startedAt: 'startedAt',
   lastActivityAt: 'lastActivityAt',
-  endedAt: 'endedAt',
-  isActive: 'isActive'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -336,64 +225,18 @@ exports.DifficultyLevel = exports.$Enums.DifficultyLevel = {
   EXPERT: 'EXPERT'
 };
 
-exports.SkillType = exports.$Enums.SkillType = {
-  KNOWLEDGE: 'KNOWLEDGE',
-  PRACTICAL: 'PRACTICAL',
-  PROJECT: 'PROJECT',
-  ASSESSMENT: 'ASSESSMENT',
-  MILESTONE: 'MILESTONE'
-};
-
-exports.TreeProgressStatus = exports.$Enums.TreeProgressStatus = {
-  NOT_STARTED: 'NOT_STARTED',
-  IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  PAUSED: 'PAUSED'
-};
-
 exports.SkillProgressStatus = exports.$Enums.SkillProgressStatus = {
   LOCKED: 'LOCKED',
   AVAILABLE: 'AVAILABLE',
   IN_PROGRESS: 'IN_PROGRESS',
-  COMPLETED: 'COMPLETED',
-  SKIPPED: 'SKIPPED'
-};
-
-exports.CompletionMethod = exports.$Enums.CompletionMethod = {
-  MANUAL: 'MANUAL',
-  ASSESSMENT: 'ASSESSMENT',
-  PROJECT: 'PROJECT',
-  TIME_BASED: 'TIME_BASED',
-  EXTERNAL: 'EXTERNAL'
-};
-
-exports.AchievementCategory = exports.$Enums.AchievementCategory = {
-  PROGRESS: 'PROGRESS',
-  STREAK: 'STREAK',
-  EXPLORATION: 'EXPLORATION',
-  MASTERY: 'MASTERY',
-  SOCIAL: 'SOCIAL',
-  TIME: 'TIME'
-};
-
-exports.AchievementRarity = exports.$Enums.AchievementRarity = {
-  COMMON: 'COMMON',
-  UNCOMMON: 'UNCOMMON',
-  RARE: 'RARE',
-  LEGENDARY: 'LEGENDARY'
+  COMPLETED: 'COMPLETED'
 };
 
 exports.Prisma.ModelName = {
   User: 'User',
-  UserProfile: 'UserProfile',
-  SkillCategory: 'SkillCategory',
   SkillTree: 'SkillTree',
   Skill: 'Skill',
-  UserSkillTreeProgress: 'UserSkillTreeProgress',
-  UserSkillProgress: 'UserSkillProgress',
-  Achievement: 'Achievement',
-  UserAchievement: 'UserAchievement',
-  UserSession: 'UserSession'
+  UserSkillProgress: 'UserSkillProgress'
 };
 
 /**
