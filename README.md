@@ -15,7 +15,6 @@ This is a monorepo containing all Skill Tree components.
 
 ### Agent Types
 - **PM** - Product Manager: Requirements, roadmaps, sprint planning
-- **Designer** - Product Designer: User research, wireframes, design systems
 - **UI/UX Dev** - UI/UX Developer: Component implementation, styling, interactions
 - **Architect** - Software Architect: System design, API specs, data models
 - **Engineer** - Software Engineer: Backend services, database, integrations
