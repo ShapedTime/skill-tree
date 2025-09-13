@@ -1,0 +1,22 @@
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install dependencies for building node modules
+RUN apk add --no-cache python3 make g++ curl
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies including dev dependencies for nodemon
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Start development server with nodemon
+CMD ["npm", "run", "dev"]
