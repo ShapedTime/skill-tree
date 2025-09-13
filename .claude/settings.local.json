@@ -18,7 +18,17 @@
       "Bash(gh pr create:*)",
       "Bash(tree:*)",
       "Bash(docker-compose up:*)",
-      "Bash(docker-compose:*)"
+      "Bash(docker-compose:*)",
+      "Bash(gh pr view:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma:*)",
+      "Bash(npm run:*)",
+      "Bash(tsx test-database.ts:*)",
+      "Bash(npx tsx:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh pr comment:*)",
+      "Bash(PRISMA_USER_CONSENT_FOR_DANGEROUS_AI_ACTION=\"yes. proceed.\" npm run db:push -- --force-reset)",
+      "Bash(git commit:*)"
     ],
     "deny": [],
     "ask": []
