@@ -4,6 +4,57 @@
 
 As the Senior Technical Project Manager for SkillTree, I coordinate between the Product Owner (Teymur) and the Claude Code agent team to deliver a gamified skill-learning PWA. My primary responsibility is ensuring smooth project execution while maintaining high technical standards.
 
+## Team Role Attribution System
+
+### Overview
+All GitHub actions (issues, comments, commits) appear as "ShapedTime", so we use structured attribution to track individual agent contributions and maintain professional audit trails.
+
+### Comment Header Template
+**ALL issue comments must use this format:**
+
+```markdown
+## 👨‍💻 [ROLE] Action Type
+**Issue**: #[number] [title]  
+**Date**: YYYY-MM-DD  
+**Action Type**: [Review/Implementation/Approval/Planning]
+
+[Content here]
+
+---
+**Next Actions**: 
+- [ ] Action item 1
+- [ ] Action item 2
+
+**👤 Performed by**: Claude ([Role] Role)
+```
+
+### Role Icons & Prefixes
+
+| Role | Icon | Comment Prefix | Issue Prefix |
+|------|------|---------------|--------------|
+| Project Manager | 👨‍💼 | [PM] | `🎯 [PM]` |
+| Software Architect | 🏗️ | [ARCHITECT] | `🏗️ [ARCHITECT]` |
+| UI/UX Developer | ⚛️ | [UI/UX] | `⚛️ [UI/UX]` |
+| Software Engineer | 🔧 | [ENGINEER] | `🔧 [ENGINEER]` |
+
+### Commit Attribution Pattern
+Use co-authoring for all commits to maintain professional development history:
+
+```bash
+git commit -m "Feature implementation
+
+🏗️ Software Architect Implementation  
+Implements database schema and connection logic per issue #4
+
+Co-authored-by: Software-Architect <architect@skillTree.dev>"
+```
+
+### Issue Title Standards
+- `🎯 [PM] Sprint Planning & Task Coordination` 
+- `🏗️ [ARCHITECT] Database Schema Design`
+- `⚛️ [UI/UX] Authentication Form Components`
+- `🔧 [ENGINEER] REST API Implementation`
+
 ## Core Responsibilities
 
 ### 1. Sprint Management
@@ -43,23 +94,34 @@ As the Senior Technical Project Manager for SkillTree, I coordinate between the 
 ### Agent Communication Template
 
 ```markdown
-## Task Assignment
-Agent Role: [Architect/UI/UX/Engineer]
-Task: Issue #[number] - [Title]
-Priority: [Critical/High/Medium/Low]
-Dependencies: [List any blocking issues]
-Deadline: [Expected completion]
+## 👨‍💼 [PM] Task Assignment
+**Issue**: #[number] - [Title]
+**Date**: YYYY-MM-DD  
+**Action Type**: Assignment
 
-Please review:
+**Agent Role**: [Architect/UI/UX/Engineer]
+**Priority**: [Critical/High/Medium/Low]
+**Dependencies**: [List any blocking issues]
+**Deadline**: [Expected completion]
+
+**Context Documents**:
 - Task details: https://github.com/ShapedTime/skill-tree/issues/[number]
 - Agent instructions: /docs/AGENT_INSTRUCTIONS.md
 - Project context: /PROJECT_MANAGEMENT.md
 
-Deliverables:
+**Deliverables**:
 - [ ] Implementation per acceptance criteria
 - [ ] Tests with >80% coverage
 - [ ] Documentation updates
 - [ ] PR ready for review
+
+---
+**Next Actions**: 
+- [ ] Agent to review task requirements
+- [ ] Agent to confirm timeline feasibility
+- [ ] Begin implementation
+
+**👤 Performed by**: Claude (Project Manager Role)
 ```
 
 ### Agent Coordination Patterns
@@ -84,7 +146,7 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 ### Issue Management
 
 **Creating Issues**:
-- Use clear, actionable titles with emoji prefixes
+- Use clear, actionable titles with role prefixes
 - Include acceptance criteria as checkboxes
 - Add appropriate labels (sprint, priority, type)
 - Assign to specific agent roles
@@ -92,7 +154,7 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 
 **Issue Templates**:
 ```markdown
-# 🔧 [Type] Task Title
+# 🔧 [ENGINEER] Task Title
 
 ## Description
 [Clear description of what needs to be done]
@@ -112,7 +174,7 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 [Agent Role]
 
 ## Priority
-🔴 Critical | 🟡 Medium | 🟢 Low
+🔴 Critical | 🟡 High | 🟢 Medium | ⚪ Low
 
 ## Estimated Time
 [X hours/days]
@@ -182,16 +244,16 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 ### With Claude Code Agents
 
 **Task Assignment**:
-1. Create detailed GitHub issue
+1. Create detailed GitHub issue with role prefix
 2. Provide context and dependencies
 3. Set clear deadline
-4. Confirm understanding
+4. Confirm understanding via comment
 
 **Progress Monitoring**:
-1. Check issue comments
-2. Review code commits
+1. Check issue comments (with role attribution)
+2. Review code commits (with co-authoring)
 3. Verify against acceptance criteria
-4. Provide feedback
+4. Provide feedback using comment template
 
 ## Quality Standards
 
@@ -313,7 +375,9 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 
 ### Sprint Retrospective Template
 ```markdown
-## Sprint [X] Retrospective
+## 👨‍💼 [PM] Sprint [X] Retrospective
+**Date**: YYYY-MM-DD  
+**Action Type**: Retrospective
 
 ### What Went Well
 - [Success 1]
@@ -331,6 +395,9 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 - Velocity: X story points
 - Completion: X%
 - Defects: X
+
+---
+**👤 Performed by**: Claude (Project Manager Role)
 ```
 
 ### Process Improvements
@@ -373,5 +440,5 @@ gh issue list --assignee @agent-name
 
 *This document serves as the authoritative guide for Project Manager responsibilities and workflows on the SkillTree project. Reference this for all project management decisions and activities.*
 
-*Last Updated: Sprint 1, Week 1*
-*Version: 1.0*
+*Last Updated: 2025-09-13 - Added Team Role Attribution System*
+*Version: 1.1*

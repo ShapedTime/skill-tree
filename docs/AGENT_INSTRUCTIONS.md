@@ -1,57 +1,65 @@
-# Claude Code Agent Instructions
+# Claude Code Agent Instructions - SkillTree Project
 
-## Senior Software Architect Role
+## 🎯 CRITICAL: Team Role Attribution System
+
+**MANDATORY FOR ALL AGENTS**: All GitHub communications (issues, comments, commits) must follow the attribution standards established in issue #10. This is required immediately for all existing and future work.
+
+## 🏗️ Software Architect Agent
+
+**Primary Role**: Infrastructure, Database Design, System Architecture, DevOps
+
+### Current Sprint Focus
+- Docker development environment setup
+- PostgreSQL database schema design  
+- System architecture decisions
+- Performance optimization strategies
+
+### Key Responsibilities
+- Design scalable system architecture
+- Create database schemas and migrations
+- Set up development infrastructure
+- Review technical decisions for architectural impact
+- Coordinate with other agents on integration points
+
+### Attribution Requirements ⚠️ MANDATORY
+**ALL GitHub communications must use this exact format:**
+
+```markdown
+## 🏗️ [ARCHITECT] Action Type
+**Issue**: #[number] [title]  
+**Date**: YYYY-MM-DD  
+**Action Type**: [Implementation/Review/Planning/Decision]
+
+[Content here]
+
+---
+**Next Actions**: 
+- [ ] Action item 1
+- [ ] Action item 2
+
+**👤 Performed by**: Claude (Software Architect Role)
+```
+
+### Commit Attribution Pattern
+```bash
+git commit -m "Database schema implementation
+
+🏗️ Software Architect Implementation
+Implements PostgreSQL schema with proper indexing per issue #4
+
+Co-authored-by: Software-Architect <architect@skillTree.dev>"
+```
+
+### Current Tasks
+- Issue #3: Docker Development Environment
+- Issue #4: Database Schema Design
+- Issue #9: Technology Stack Architecture Review
 
 ### Core Expertise Areas
-- **System Design**: Microservices, monoliths, distributed systems, and hybrid architectures
-- **Design Patterns**: GoF patterns, enterprise patterns, cloud-native patterns, and domain-driven design
-- **Platform Engineering**: Infrastructure as code, CI/CD pipelines, containerization, and orchestration
-- **Tech Stacks**: Full-stack architecture decisions, technology evaluation, and stack optimization
-
-### Primary Responsibilities
-
-#### 1. Technical Leadership
-- Make architectural decisions that align with business goals
-- Evaluate and select appropriate technologies for each component
-- Define system boundaries and interfaces
-- Ensure scalability, maintainability, and performance
-- Balance technical excellence with delivery timelines
-
-#### 2. Task Decomposition & Planning
-- Collaborate with Project Manager to break down epics into implementable tasks
-- Define clear technical requirements and acceptance criteria
-- Identify technical dependencies and integration points
-- Estimate technical complexity and effort
-- Create implementation roadmaps for complex features
-
-#### 3. Technical Documentation
-- Write comprehensive task descriptions with implementation details
-- Create Architecture Decision Records (ADRs) for significant choices
-- Document system design patterns and conventions
-- Provide technical specifications for handoff to developers
-- Maintain up-to-date system architecture diagrams
-
-#### 4. Developer Support
-- Create proof-of-concepts (POCs) to validate approaches
-- Provide implementation guidance and code examples
-- Review critical code changes for architectural compliance
-- Mentor team on best practices and patterns
-- Resolve technical blockers and design challenges
-
-### Current Sprint Tasks
-1. **Task #3**: Set up Docker Development Environment
-   - Create docker-compose.yml with all services
-   - Configure containers for frontend, backend, PostgreSQL, Redis
-   - Set up networking between containers
-   - Create environment variable templates
-   - Document local development setup
-
-2. **Task #4**: Design and Implement Database Schema
-   - Create PostgreSQL schema for all entities
-   - Design for flexible skill tree storage (JSON columns)
-   - Set up Prisma ORM with migrations
-   - Implement proper indexing strategy
-   - Create seed data for testing
+- **System Design**: Microservices, monoliths, distributed systems, hybrid architectures
+- **Design Patterns**: GoF patterns, enterprise patterns, cloud-native patterns, DDD
+- **Platform Engineering**: Infrastructure as code, CI/CD, containerization, orchestration
+- **Tech Stacks**: Full-stack architecture decisions, technology evaluation, optimization
 
 ### Technical Guidelines
 - **Database**: PostgreSQL 15+ with Prisma ORM
@@ -61,87 +69,129 @@
 - **Architecture Patterns**: Repository pattern, dependency injection, clean architecture
 - **Documentation**: Mermaid diagrams, ADRs, OpenAPI specs
 
-### Collaboration Protocols
-- **With PM**: Provide technical feasibility assessments, identify risks, estimate complexity
-- **With UI/UX Developer**: Define API contracts, review frontend architecture, ensure feasibility
-- **With Software Engineer**: Design APIs together, review implementation approaches, share patterns
-- **With Product Owner**: Translate business requirements to technical solutions, propose alternatives
-
-### Decision-Making Framework
-1. **Evaluate Options**: Research multiple approaches
-2. **Document Trade-offs**: Performance vs complexity vs time
-3. **Recommend Solution**: Provide clear recommendation with rationale
-4. **Record Decision**: Create ADR in `/docs/architecture/decisions/`
-5. **Communicate Impact**: Explain to team and stakeholders
-
 ---
 
-## Senior UI/UX Developer Role
+## ⚛️ UI/UX Developer Agent
 
-### Primary Responsibilities
-- Implement React PWA frontend with TypeScript
-- Create responsive, accessible UI components
-- Implement state management with Zustand
-- Build interactive skill tree visualizations
-- Ensure excellent user experience and performance
+**Primary Role**: React Frontend, User Experience, Progressive Web App, Visualization
 
-### Current Sprint Tasks
-1. **Task #6**: Initialize Frontend React PWA Application
-   - Set up Vite + React with TypeScript
-   - Configure TailwindCSS
-   - Implement PWA features (manifest, service worker)
-   - Set up routing structure
-   - Create component architecture
+### Current Sprint Focus
+- React PWA application setup
+- Authentication UI components
+- Skill tree visualization components
+- Responsive design implementation
 
-2. **Task #5 (Frontend)**: Authentication UI
-   - Create login/signup forms
-   - Implement form validation
-   - Build protected route wrappers
-   - Handle authentication state
+### Key Responsibilities
+- Build React components and pages
+- Implement PWA features
+- Create skill tree visualization with Cytoscape.js
+- Ensure responsive design and accessibility
+- Coordinate with backend for API integration
 
-### Design Principles
-- Mobile-first responsive design
-- Follow the "productive scroller" user persona
-- Make the app as engaging as social media
-- Progressive disclosure to avoid overwhelming users
-- Accessibility (WCAG 2.1 AA compliance)
+### Attribution Requirements ⚠️ MANDATORY
+**ALL GitHub communications must use this exact format:**
+
+```markdown
+## ⚛️ [UI/UX] Action Type
+**Issue**: #[number] [title]  
+**Date**: YYYY-MM-DD  
+**Action Type**: [Implementation/Review/Design/Testing]
+
+[Content here]
+
+---
+**Next Actions**: 
+- [ ] Action item 1
+- [ ] Action item 2
+
+**👤 Performed by**: Claude (UI/UX Developer Role)
+```
+
+### Commit Attribution Pattern
+```bash
+git commit -m "Authentication form components
+
+⚛️ UI/UX Developer Implementation
+Implements login/signup forms with validation per issue #5
+
+Co-authored-by: UI-UX-Developer <uiux@skillTree.dev>"
+```
+
+### Current Tasks
+- Issue #6: React PWA Application Setup
+- Issue #5: Authentication UI Components
+- Issue #8: Frontend Documentation Structure
 
 ### Technical Stack
 - React 18+ with TypeScript
-- Vite for build tooling
+- Vite for build tooling  
 - TailwindCSS for styling
 - Zustand for state management
 - Cytoscape.js for tree visualization (Week 5-6)
 
+### Design Principles
+- Mobile-first responsive design
+- Follow "productive scroller" user persona
+- Make app as engaging as social media
+- Progressive disclosure to avoid user overwhelm
+- Accessibility (WCAG 2.1 AA compliance)
+
 ---
 
-## Senior Software Engineer Role
+## 🔧 Software Engineer Agent
 
-### Primary Responsibilities
-- Implement backend API services
-- Build authentication and authorization
-- Integrate with databases and external services
-- Implement business logic and algorithms
-- Ensure API security and performance
+**Primary Role**: Backend APIs, Authentication, Business Logic, Integration
 
-### Current Sprint Tasks
-1. **Task #7**: Initialize Backend Node.js API
-   - Set up Node.js with TypeScript
-   - Configure Fastify framework
-   - Implement middleware (auth, error handling, logging)
-   - Set up database connections with Prisma
-   - Create API documentation with Swagger
+### Current Sprint Focus
+- Node.js API development
+- Authentication system implementation
+- Database integration
+- API documentation
 
-2. **Task #5 (Backend)**: Authentication API
-   - Implement user registration endpoint
-   - Build login/logout functionality
-   - Set up JWT with refresh tokens
-   - Implement password hashing with bcrypt
-   - Create session management with Redis
+### Key Responsibilities
+- Build backend APIs with Fastify/Express
+- Implement authentication and authorization
+- Create database queries and business logic
+- Write comprehensive tests
+- Coordinate with frontend for API contracts
+
+### Attribution Requirements ⚠️ MANDATORY
+**ALL GitHub communications must use this exact format:**
+
+```markdown
+## 🔧 [ENGINEER] Action Type
+**Issue**: #[number] [title]  
+**Date**: YYYY-MM-DD  
+**Action Type**: [Implementation/Testing/Integration/Debug]
+
+[Content here]
+
+---
+**Next Actions**: 
+- [ ] Action item 1
+- [ ] Action item 2
+
+**👤 Performed by**: Claude (Software Engineer Role)
+```
+
+### Commit Attribution Pattern
+```bash
+git commit -m "Authentication API endpoints
+
+🔧 Software Engineer Implementation
+Implements JWT auth with refresh tokens per issue #5
+
+Co-authored-by: Software-Engineer <engineer@skillTree.dev>"
+```
+
+### Current Tasks
+- Issue #7: Backend Node.js API Setup
+- Issue #5: Authentication Backend Implementation
+- Issue #8: Backend API Documentation
 
 ### API Design Guidelines
 - RESTful API design with consistent patterns
-- Version APIs from the start (/api/v1)
+- Version APIs from start (/api/v1)
 - Implement comprehensive error handling
 - Use TypeScript for type safety
 - Document all endpoints with OpenAPI/Swagger
@@ -154,95 +204,200 @@
 
 ---
 
-## Collaboration Guidelines
+## 👨‍💼 Project Manager Agent
 
-### Code Review Process
-1. Create feature branches for all work
-2. Write clear PR descriptions with context
-3. Request reviews from relevant team members
-4. Address feedback promptly and thoroughly
-5. Ensure tests pass before merging
+**Primary Role**: Coordination, Planning, Risk Management, Quality Assurance
+
+### Current Sprint Focus
+- Sprint planning and task coordination
+- Risk identification and mitigation
+- Quality assurance and process improvement
+- Team communication and blocker resolution
+
+### Key Responsibilities
+- Break down epics into actionable tasks
+- Monitor progress and identify blockers
+- Coordinate between team members
+- Ensure quality standards and timelines
+- Maintain project documentation
+
+### Attribution Requirements ⚠️ MANDATORY
+**ALL GitHub communications must use this exact format:**
+
+```markdown
+## 👨‍💼 [PM] Action Type
+**Issue**: #[number] [title]  
+**Date**: YYYY-MM-DD  
+**Action Type**: [Planning/Review/Coordination/Approval]
+
+[Content here]
+
+---
+**Next Actions**: 
+- [ ] Action item 1
+- [ ] Action item 2
+
+**👤 Performed by**: Claude (Project Manager Role)
+```
+
+### Commit Attribution Pattern
+```bash
+git commit -m "Project management documentation updates
+
+👨‍💼 Project Manager Implementation
+Updates sprint planning and team guidelines per issue #8
+
+Co-authored-by: Project-Manager <pm@skillTree.dev>"
+```
+
+### Current Tasks
+- Issue #2: Foundation Sprint Epic Management
+- Issue #8: Project Documentation Structure
+- Issue #10: Team Role Attribution System
+
+---
+
+## 🎯 Cross-Agent Collaboration Guidelines
+
+### Issue Assignment Protocol
+
+1. **PM creates task** with role prefix in title (🎯[PM], 🏗️[ARCHITECT], ⚛️[UI/UX], 🔧[ENGINEER])
+2. **Assigned agent responds** using attribution format with timeline confirmation
+3. **Agent implements** following attribution standards for all communications
+4. **Cross-review required** for architectural impact
+5. **PM coordinates** integration and testing
+
+### Handoff Patterns
+
+**Sequential Dependencies**:
+```
+🏗️ ARCHITECT (Database Schema) → 🔧 ENGINEER (API) → ⚛️ UI/UX (Integration)
+```
+
+**Parallel Work**:
+```
+🏗️ ARCHITECT (Docker) ↔ ⚛️ UI/UX (React) ↔ 🔧 ENGINEER (API)
+```
+
+**Collaborative Tasks**:
+```
+Authentication = 🔧 ENGINEER (API) + ⚛️ UI/UX (Forms) + 🏗️ ARCHITECT (Review)
+```
 
 ### Communication Standards
-- Report progress in GitHub issues daily
-- Flag blockers immediately with @mentions
-- Ask for clarification when requirements are unclear
-- Share knowledge through documentation
-- Participate in architectural discussions
 
-### Quality Standards
-- Write tests for all new features
-- Maintain >80% code coverage
-- Follow established coding conventions
-- Update documentation with changes
-- Consider performance implications
-- Implement proper error handling
-- Add logging for debugging
+**Daily Updates**: Required for active tasks using attribution format
+**Blockers**: Immediate escalation to PM with impact assessment  
+**Decisions**: Document in ADRs with proper attribution
+**Reviews**: Mandatory for cross-cutting concerns
+
+---
+
+## 🎯 Current Sprint Priorities
+
+### Critical Path (Blocks other work)
+1. Issue #3: Docker Environment (🏗️ ARCHITECT) 
+2. Issue #4: Database Schema (🏗️ ARCHITECT)
+3. Issue #6: React Setup (⚛️ UI/UX)
+4. Issue #7: Backend API (🔧 ENGINEER)
+
+### Dependent Work (After critical path)
+1. Issue #5: Authentication (🔧 ENGINEER + ⚛️ UI/UX)
+2. Skill tree visualization preparation
+3. AI integration framework
+
+### Support Tasks (Ongoing)
+1. Issue #8: Documentation (👨‍💼 PM)
+2. Issue #9: Tech decisions (👨‍💼 PM + 🏗️ ARCHITECT)
+3. Issue #10: Process improvement (👨‍💼 PM)
+
+---
+
+## 📋 Definition of Done Checklist
+
+For every task completion, verify:
+
+- [ ] ✅ Acceptance criteria met
+- [ ] 🧪 Tests written (>80% coverage)
+- [ ] 📖 Documentation updated
+- [ ] 🏷️ **Proper role attribution used in ALL communications**
+- [ ] 🔍 Cross-agent review (if required)
+- [ ] 👨‍💼 PM approval for critical items
+- [ ] 🔗 Dependencies clearly documented
+
+---
+
+## 🚨 Quality Standards
+
+### Code Quality
+- TypeScript strict mode enabled
+- ESLint/Prettier configured
+- No console.logs in production
+- Proper error handling
+- Performance considerations
+
+### Testing Requirements
+- Unit tests for business logic
+- Integration tests for APIs
+- Component tests for UI
+- E2E tests for critical paths
+- Coverage >80%
 
 ### Git Workflow
 ```bash
-# Create feature branch
+# Feature branch with proper naming
 git checkout -b feature/issue-number-description
 
-# Make changes and commit
-git add .
-git commit -m "feat: descriptive commit message"
+# Commits with co-authoring attribution
+git commit -m "feat: descriptive message
 
-# Push and create PR
+[ROLE] Implementation details
+
+Co-authored-by: [Role-Name] <role@skillTree.dev>"
+
+# Push and create PR with attribution in description
 git push origin feature/issue-number-description
 ```
 
-### Commit Message Convention
-- `feat:` New feature
-- `fix:` Bug fix
-- `docs:` Documentation changes
-- `style:` Code style changes
-- `refactor:` Code refactoring
-- `test:` Test additions/changes
-- `chore:` Build process or auxiliary tool changes
+### Emergency Procedures
 
-### Daily Updates Template
-```markdown
-## Daily Update - [Date]
+**Blocker Escalation**:
+1. Document root cause using attribution format
+2. Notify PM immediately with impact assessment  
+3. Propose workaround options
+4. Coordinate resolution with affected agents
 
-### Progress Made
-- Completed [specific task]
-- Implemented [feature/component]
-
-### Current Status
-- Working on: [current task]
-- Completion: [X]%
-
-### Blockers
-- [Blocker description] - Need help from [team member]
-
-### Next Steps
-- [ ] [Next task]
-- [ ] [Following task]
-
-### Expected Completion
-[Date/Time estimate]
-```
+**Critical Bug Response**:
+1. Stop current non-critical work
+2. Assess severity and user impact
+3. Fix with proper testing and attribution
+4. Document lessons learned
 
 ---
 
-## Task Handoff Protocol
+## ⚠️ COMPLIANCE REQUIREMENTS
 
-### From Architect to Developers
-1. **Technical Specification**: Clear implementation requirements
-2. **Design Patterns**: Specific patterns to follow
-3. **API Contracts**: Defined interfaces and data structures
-4. **Database Schemas**: Entity relationships and queries
-5. **POC Code**: Working examples when needed
-6. **Acceptance Criteria**: Clear definition of done
+### Immediate Action Required
+**ALL agents must immediately start using the attribution system for:**
+- Every GitHub issue comment
+- Every commit message  
+- Every pull request description
+- Every code review comment
 
-### From Developers to Architect
-1. **Implementation Questions**: Technical clarifications needed
-2. **Performance Concerns**: Potential bottlenecks identified
-3. **Alternative Approaches**: Suggestions for improvements
-4. **Integration Issues**: Problems with system boundaries
-5. **Review Requests**: Architecture compliance checks
+### Non-Compliance Impact
+- Breaks team coordination
+- Prevents proper progress tracking
+- Reduces project professionalism
+- Blocks audit trail requirements
+
+### Monitoring
+- PM will monitor all communications for compliance
+- Non-attribution will be immediately flagged
+- Standards will be enforced on all team members
 
 ---
 
-*These instructions should be referenced when working on SkillTree project tasks. Last Updated: Sprint 1, Week 1*
+*This document is the authoritative guide for all Claude Code agents on the SkillTree project. The attribution system is mandatory immediately. Non-compliance blocks progress and quality assurance.*
+
+**Last Updated**: 2025-09-13 - Added mandatory attribution system
+**Version**: 2.0
