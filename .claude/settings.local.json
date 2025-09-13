@@ -7,7 +7,12 @@
       "Bash(gh issue view:*)",
       "Bash(gh issue comment:*)",
       "Bash(gh issue edit:*)",
-      "Bash(gh issue close:*)"
+      "Bash(gh issue close:*)",
+      "Bash(git pull:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []

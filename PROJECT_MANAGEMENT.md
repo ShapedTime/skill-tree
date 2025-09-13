@@ -103,6 +103,7 @@ Establish core development infrastructure and basic application skeleton with au
 | Software Architect | 100% | Architecture + Setup | Busy |
 | UI/UX Developer | 100% | Frontend development | Waiting |
 | Software Engineer | 100% | Backend development | Waiting |
+| AI Engineer | 100% | Workflow orchestration | Available |
 
 ## 🎯 Sprint Success Criteria
 
@@ -158,6 +159,11 @@ Establish core development infrastructure and basic application skeleton with au
 - 🟢 Primary: Documentation structure (#8)
 - 🟢 Primary: Sprint coordination and blocker removal
 - 🟢 Primary: Team communication and attribution
+
+**AI Engineer** (Available - Workflow Orchestration)
+- 🟢 Primary: Agent coordination and workflow optimization
+- 🟢 Primary: Context engineering for multi-agent tasks
+- 🟢 Support: Process automation and team efficiency
 
 ## 🔄 Daily Standup Framework
 

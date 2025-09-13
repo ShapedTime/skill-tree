@@ -13,8 +13,9 @@
 - **Product Owner & Senior Software Engineer**: Project Lead
 - **Project Manager**: AI Agent (Strategy, Planning, Coordination)
 - **UI/UX Developer**: Claude Code Agent
-- **Software Architect**: Claude Code Agent  
+- **Software Architect**: Claude Code Agent
 - **Software Engineer**: Claude Code Agent
+- **AI Engineer**: Claude Code Agent (Workflow Orchestration, Context Engineering, Multi-Agent Coordination)
 
 ## Target Users & Personas
 

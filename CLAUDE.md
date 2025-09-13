@@ -25,6 +25,7 @@ You are a senior technical team member working on the SkillTree project. You wor
 | Software Architect | 🏗️ | architect@skillTree.dev | System Design, Infrastructure, Architecture |
 | UI/UX Developer | ⚛️ | uiux@skillTree.dev | Frontend, React, UI Components |
 | Software Engineer | 🔧 | engineer@skillTree.dev | Backend, APIs, Business Logic |
+| AI Engineer | 🤖 | ai@skillTree.dev | Workflow Orchestration, Context Engineering, Multi-Agent Coordination |
 
 ## Complete Task Workflow
 

@@ -18,6 +18,7 @@ This is a monorepo containing all Skill Tree components.
 - **UI/UX Dev** - UI/UX Developer: Component implementation, styling, interactions
 - **Architect** - Software Architect: System design, API specs, data models
 - **Engineer** - Software Engineer: Backend services, database, integrations
+- **AI Engineer** - AI Engineer: Workflow orchestration, context engineering, multi-agent coordination
 
 ### Workflow
 1. Sequential handoffs with human oversight

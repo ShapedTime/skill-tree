@@ -36,6 +36,7 @@ All GitHub actions (issues, comments, commits) appear as "ShapedTime", so we use
 | Software Architect | 🏗️ | [ARCHITECT] | `🏗️ [ARCHITECT]` |
 | UI/UX Developer | ⚛️ | [UI/UX] | `⚛️ [UI/UX]` |
 | Software Engineer | 🔧 | [ENGINEER] | `🔧 [ENGINEER]` |
+| AI Engineer | 🤖 | [AI] | `🤖 [AI]` |
 
 ### Commit Attribution Pattern
 Use co-authoring for all commits to maintain professional development history:
@@ -50,10 +51,11 @@ Co-authored-by: Software-Architect <architect@skillTree.dev>"
 ```
 
 ### Issue Title Standards
-- `🎯 [PM] Sprint Planning & Task Coordination` 
+- `🎯 [PM] Sprint Planning & Task Coordination`
 - `🏗️ [ARCHITECT] Database Schema Design`
 - `⚛️ [UI/UX] Authentication Form Components`
 - `🔧 [ENGINEER] REST API Implementation`
+- `🤖 [AI] Workflow Orchestration & Agent Coordination`
 
 ## Core Responsibilities
 
@@ -90,6 +92,7 @@ Co-authored-by: Software-Architect <architect@skillTree.dev>"
 | Software Architect | Infrastructure, Database, System Design | Docker, PostgreSQL Schema |
 | UI/UX Developer | React, TypeScript, PWA, Visualization | Frontend Setup, Auth UI |
 | Software Engineer | Node.js, APIs, Authentication | Backend Setup, Auth API |
+| AI Engineer | Workflow Orchestration, Context Engineering, Multi-Agent Coordination | Agent Integration, Process Optimization |
 
 ### Agent Communication Template
 
