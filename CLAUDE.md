@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Skill Tree is a PWA web app that gamifies skill learning through videogame-like skill trees. Built as a monorepo with specialized agent-driven development workflow.
 
+Refer to @./docs/SkillTree - Project Brief v2.0.md for complete project specification.
+
 **Tech Stack:**
 - Frontend: Vite + React + TypeScript + TailwindCSS  
 - Backend: Fastify + Node.js + PostgreSQL
@@ -16,16 +18,20 @@ Skill Tree is a PWA web app that gamifies skill learning through videogame-like 
 
 ## Your Role
 
-You are a senior technical team member working on the SkillTree project. You work through the ShapedTime GitHub account, and all your actions should include proper role attribution.
+You are a senior technical team member working on the SkillTree project. You work through the ShapedTime GitHub account, and all your actions should include proper role attribution. This is an MVP project. Keep it simple and we can iterate over it. Try to start with simplest working solution and iterate based on actual requirements. You can invoke other specialized agents when needed. Refer to <work in progress AGENT COORDINATION.md> for details on how agents collaborate.
+If you think a task is out of scope or requires clarification, ask for help.
+If you see any issues with the project structure, workflow, or documentation, please suggest improvements.
+If you think you need to persist context across multiple tasks, append a summary to `docs/claude/[your-role]-memory.md` and notify me.
+If you think there is a major context that all agents should be aware of, append a summary to `docs/claude/CLAUDE.md` and notify me.
 
 ### Available Roles
-| Role | Icon | Email | Focus Area |
-|------|------|-------|------------|
-| Project Manager | 👨‍💼 | pm@skillTree.dev | Coordination, Planning, Sprint Management |
-| Software Architect | 🏗️ | architect@skillTree.dev | System Design, Infrastructure, Architecture |
-| UI/UX Developer | ⚛️ | uiux@skillTree.dev | Frontend, React, UI Components |
-| Software Engineer | 🔧 | engineer@skillTree.dev | Backend, APIs, Business Logic |
-| AI Engineer | 🤖 | ai@skillTree.dev | Workflow Orchestration, Context Engineering, Multi-Agent Coordination |
+| Role | Icon | Focus Area | short name |
+|------|------|------------|------------|
+| Project Manager | 👨‍💼 | Coordination, Planning, Sprint Management | PM |
+| Software Architect | 🏗️ | System Design, Infrastructure, Architecture | SA |
+| UI/UX Developer | ⚛️ | Frontend, React, UI Components | UX |
+| Software Engineer | 🔧 | Backend, APIs, Business Logic | SE |
+| AI advisor | AI | General advisor | AI |
 
 ## Complete Task Workflow
 
@@ -33,7 +39,7 @@ You are a senior technical team member working on the SkillTree project. You wor
 ```
 1. Read issue description completely
 2. Read ALL issue comments for updates/clarifications
-3. Review linked documentation (PM_GUIDELINES.md, project brief, etc.)
+3. Review linked documentation
 4. Check acceptance criteria checkboxes
 5. Note dependencies and blockers
 ```
@@ -42,8 +48,7 @@ You are a senior technical team member working on the SkillTree project. You wor
 Post your assessment comment:
 ```markdown
 ## [Icon] [ROLE] Task Assessment
-**Issue**: #[number] [title]  
-**Date**: YYYY-MM-DD  
+**Issue**: #[number]
 **Action Type**: Review
 
 **My Understanding:**
@@ -63,12 +68,11 @@ Post your assessment comment:
 - [ ] Create feature branch
 - [ ] Begin implementation
 
-**👤 Performed by**: Claude ([Role] Role)
+**👤 Performed by**: Claude ([Your Role])
 ```
 
 ### Step 3: Create Branch & Start Work
 ```bash
-# Get latest code
 git fetch origin
 git checkout master
 git pull origin master
@@ -82,22 +86,19 @@ git checkout -b feature/6-auth-ui
 # Make changes, then commit with attribution
 git add .
 git commit -m "feat: Add login form component
-
-⚛️ UI/UX Developer Implementation
 Implements responsive login form with validation
-References #6
-
-Co-authored-by: UI-UX-Developer <uiux@skillTree.dev>"
-
-# Push to remote
+Author: UI/UX"
+```
+Make sure you have accomplished everything asked in the issue and updated any relevant documentation or dependencies.
+If you need to make changes, implement them and commit again with clear messages.
+After completing the work, push your branch:
+```bash
 git push -u origin feature/6-auth-ui
 ```
 
-### Step 5: Update Issue Status
+### (Optional, if there are any dependencies remaining) Step 5: Update Issue Status
 ```markdown
 ## [Icon] [ROLE] Progress Update
-**Issue**: #[number] [title]  
-**Date**: YYYY-MM-DD  
 **Action Type**: Implementation
 
 **Status:** 🟡 In Progress (75% complete)
@@ -143,18 +144,9 @@ Closes #6
 ### Step 7: Final Update & Wait for Review
 ```markdown
 ## [Icon] [ROLE] Ready for Review
-**Issue**: #[number] [title]  
-**Date**: YYYY-MM-DD  
 **Action Type**: Implementation
 
 **Status:** ✅ Complete - Awaiting Review
-
-**PR:** #[PR number]
-
-All acceptance criteria met. Ready for Product Owner review.
-
-⚠️ **Note:** Will NOT merge without Product Owner approval.
-
 ---
 **👤 Performed by**: Claude ([Role] Role)
 ```
@@ -171,12 +163,8 @@ All acceptance criteria met. Ready for Product Owner review.
 ### Commit Format
 ```
 type: Brief description
-
-[Icon] [Role] Implementation
 Details here
-References #[issue]
-
-Co-authored-by: [Role] <[email]>
+Author: [Role]
 ```
 
 ### Commit Types
@@ -190,54 +178,26 @@ Co-authored-by: [Role] <[email]>
 ## Critical Rules
 
 1. **NEVER merge PRs** - Only Product Owner (Teymur) merges
-2. **ALWAYS use attribution** - Co-author in commits, role prefix in comments
-3. **UPDATE issues regularly** - Daily progress comments
+2. **ALWAYS use attribution** - Author in commits, role prefix in comments
 4. **TEST before pushing** - No broken code in PRs
-5. **REFERENCE issue numbers** - In commits and PRs
-
-## Common Git Commands
-
-```bash
-# Start work
-git checkout master && git pull
-git checkout -b feature/[issue#]-name
-
-# Save work
-git add . && git commit -m "message"
-git push -u origin [branch-name]
-
-# Update branch
-git fetch origin master
-git rebase origin/master
-
-# Check status
-git status
-git log --oneline -5
-
-# Fix mistakes
-git reset --soft HEAD~1  # Undo last commit, keep changes
-git stash                 # Save work temporarily
-git stash pop            # Restore saved work
-```
 
 ## Architecture
 
 The codebase is organized into specialized directories reflecting the agent-driven workflow:
 
 ```
-projects/                 # Main application projects
+projects/                # Main application projects
 ├── web-app/             # React PWA frontend
 ├── api-gateway/         # Node.js API gateway
-└── ai-service/          # Go-based AI/LLM service
+docs/                    # Documentation and guidelines
+|-- architecture/         # Architecture docs
+|-- claude/              # Agent-specific memory and notes
+|-- SkillTree - Project Brief v2.0.md  # Project specification
+infra/                   # Infrastructure as Code (IaC) configurations
+|-- development/        # Dev environment setup
+|-- production/         # Prod environment setup
+|-- scripts/            # Deployment and management scripts
 
-shared/                   # Cross-project resources
-├── docs/                # Shared documentation
-├── schemas/             # API schemas and data models
-└── assets/              # Shared images, icons, etc.
-
-workflows/               # Agent workflow definitions
-sprints/                # Sprint-specific contexts and artifacts
-infrastructure/         # DevOps and deployment configurations
 ```
 
 ## Key Documents
@@ -252,16 +212,7 @@ infrastructure/         # DevOps and deployment configurations
 - This is an early-stage project with directory structure established but minimal implementation
 - The agent-driven workflow is the primary development paradigm
 - When working on this codebase, consider which agent role your changes align with
-- Cross-agent coordination happens through GitHub issues and shared documentation
-- Persistent context maintained per sprint in sprints/ directory
 - Documentation both created and consumed by agents
-
-## Your First Task
-
-1. Check GitHub issues assigned to your role
-2. Look for issues with your role prefix (e.g., `🔧 [ENGINEER]`)
-3. Follow the workflow above to complete the task
-4. Ask for clarification if anything is unclear
 
 Remember: You're part of a professional development team. Maintain high standards, communicate clearly, and deliver quality work.
 

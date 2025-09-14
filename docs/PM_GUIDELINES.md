@@ -4,59 +4,6 @@
 
 As the Senior Technical Project Manager for SkillTree, I coordinate between the Product Owner (Teymur) and the Claude Code agent team to deliver a gamified skill-learning PWA. My primary responsibility is ensuring smooth project execution while maintaining high technical standards.
 
-## Team Role Attribution System
-
-### Overview
-All GitHub actions (issues, comments, commits) appear as "ShapedTime", so we use structured attribution to track individual agent contributions and maintain professional audit trails.
-
-### Comment Header Template
-**ALL issue comments must use this format:**
-
-```markdown
-## 👨‍💻 [ROLE] Action Type
-**Issue**: #[number] [title]  
-**Date**: YYYY-MM-DD  
-**Action Type**: [Review/Implementation/Approval/Planning]
-
-[Content here]
-
----
-**Next Actions**: 
-- [ ] Action item 1
-- [ ] Action item 2
-
-**👤 Performed by**: Claude ([Role] Role)
-```
-
-### Role Icons & Prefixes
-
-| Role | Icon | Comment Prefix | Issue Prefix |
-|------|------|---------------|--------------|
-| Project Manager | 👨‍💼 | [PM] | `🎯 [PM]` |
-| Software Architect | 🏗️ | [ARCHITECT] | `🏗️ [ARCHITECT]` |
-| UI/UX Developer | ⚛️ | [UI/UX] | `⚛️ [UI/UX]` |
-| Software Engineer | 🔧 | [ENGINEER] | `🔧 [ENGINEER]` |
-| AI Engineer | 🤖 | [AI] | `🤖 [AI]` |
-
-### Commit Attribution Pattern
-Use co-authoring for all commits to maintain professional development history:
-
-```bash
-git commit -m "Feature implementation
-
-🏗️ Software Architect Implementation  
-Implements database schema and connection logic per issue #4
-
-Co-authored-by: Software-Architect <architect@skillTree.dev>"
-```
-
-### Issue Title Standards
-- `🎯 [PM] Sprint Planning & Task Coordination`
-- `🏗️ [ARCHITECT] Database Schema Design`
-- `⚛️ [UI/UX] Authentication Form Components`
-- `🔧 [ENGINEER] REST API Implementation`
-- `🤖 [AI] Workflow Orchestration & Agent Coordination`
-
 ## Core Responsibilities
 
 ### 1. Sprint Management
@@ -85,38 +32,24 @@ Co-authored-by: Software-Architect <architect@skillTree.dev>"
 
 ## Working with Claude Code Agents
 
-### Agent Roles & Expertise
-
-| Agent | Primary Skills | Current Sprint Focus |
-|-------|---------------|---------------------|
-| Software Architect | Infrastructure, Database, System Design | Docker, PostgreSQL Schema |
-| UI/UX Developer | React, TypeScript, PWA, Visualization | Frontend Setup, Auth UI |
-| Software Engineer | Node.js, APIs, Authentication | Backend Setup, Auth API |
-| AI Engineer | Workflow Orchestration, Context Engineering, Multi-Agent Coordination | Agent Integration, Process Optimization |
+Refer to /CLAUDE.md for roles and responsibilities of each agent type.
 
 ### Agent Communication Template
 
 ```markdown
 ## 👨‍💼 [PM] Task Assignment
-**Issue**: #[number] - [Title]
-**Date**: YYYY-MM-DD  
 **Action Type**: Assignment
 
-**Agent Role**: [Architect/UI/UX/Engineer]
+**Agent Role**: [SA|UX|SE]
 **Priority**: [Critical/High/Medium/Low]
 **Dependencies**: [List any blocking issues]
-**Deadline**: [Expected completion]
 
 **Context Documents**:
-- Task details: https://github.com/ShapedTime/skill-tree/issues/[number]
-- Agent instructions: /docs/AGENT_INSTRUCTIONS.md
-- Project context: /PROJECT_MANAGEMENT.md
+- [Link to relevant docs or ADRs]
 
 **Deliverables**:
-- [ ] Implementation per acceptance criteria
-- [ ] Tests with >80% coverage
-- [ ] Documentation updates
-- [ ] PR ready for review
+- [ ] [Deliverable 1]
+- [ ] [Deliverable 2]
 
 ---
 **Next Actions**: 
@@ -124,7 +57,7 @@ Co-authored-by: Software-Architect <architect@skillTree.dev>"
 - [ ] Agent to confirm timeline feasibility
 - [ ] Begin implementation
 
-**👤 Performed by**: Claude (Project Manager Role)
+**👤 Performed by**: Claude (PM)
 ```
 
 ### Agent Coordination Patterns
@@ -187,7 +120,6 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 
 **Files to Maintain**:
 - `PROJECT_MANAGEMENT.md` - Sprint dashboard (update daily)
-- `docs/AGENT_INSTRUCTIONS.md` - Agent roles and tasks
 - `docs/architecture/decisions/` - ADRs for major decisions
 - `docs/sprint-reports/` - Sprint retrospectives
 
@@ -196,28 +128,6 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 - Weekly: PROJECT_MANAGEMENT.md dashboard
 - Sprint End: Retrospective report
 - As Needed: Architecture decisions
-
-## Sprint Execution Framework
-
-### Week Structure
-
-**Monday - Sprint Planning**
-- Review upcoming work
-- Assign tasks to agents
-- Identify dependencies
-- Update sprint board
-
-**Tuesday-Thursday - Development**
-- Monitor progress
-- Remove blockers
-- Coordinate reviews
-- Adjust priorities
-
-**Friday - Integration & Review**
-- Verify completed work
-- Plan next week
-- Update documentation
-- Report to Product Owner
 
 ### Daily Checklist
 
@@ -325,29 +235,11 @@ Authentication = UI/UX (forms) + Engineer (API) + Architect (review)
 - Performance benchmarks
 - Documentation completeness
 
-## Decision Log
-
-### Technology Stack (Approved)
-- Frontend: Vite + React + TypeScript
-- Backend: Fastify + Node.js
-- Database: PostgreSQL + Prisma
-- Visualization: Cytoscape.js
-- State: Zustand
-- Auth: JWT with refresh tokens
-
-### Architectural Patterns
-- API versioning from start (/api/v1)
-- Feature-based folder structure
-- Dependency injection for testing
-- Repository pattern for data access
-- PWA with offline support
-
 ## Tools & Resources
 
 ### Development Tools
 - GitHub Issues - Task tracking
 - GitHub Projects - Sprint boards
-- GitHub Actions - CI/CD
 - Docker - Development environment
 - Swagger - API documentation
 
