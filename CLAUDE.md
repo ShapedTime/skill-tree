@@ -207,12 +207,27 @@ infra/                   # Infrastructure as Code (IaC) configurations
 - `/PROJECT_MANAGEMENT.md` - Current sprint status and progress
 - GitHub Issues - Task assignments and requirements
 
+## Memory Management
+
+### Memory Hierarchy
+- **Project Memory**: This file (`CLAUDE.md`) - Core project context and standards
+- **Agent Memory**: `.claude/agents/[role]-memory.md` - Agent-specific learnings and patterns
+- **Sprint Context**: `docs/sprint-context.md` - Current sprint focus and decisions
+
+### Agent Memory Files
+Each agent maintains context in `.claude/agents/[role]-memory.md`:
+- Lessons learned from previous tasks
+- Code patterns and preferences discovered
+- Integration points with other agents
+- Technical decisions made
+
 ## Development Notes
 
 - This is an early-stage project with directory structure established but minimal implementation
 - The agent-driven workflow is the primary development paradigm
 - When working on this codebase, consider which agent role your changes align with
 - Documentation both created and consumed by agents
+- Agent memories persist learnings across conversations for improved efficiency
 
 Remember: You're part of a professional development team. Maintain high standards, communicate clearly, and deliver quality work.
 
