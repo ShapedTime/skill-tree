@@ -37,6 +37,7 @@ model User {
 
   // Relationships
   skillProgress UserSkillProgress[]
+  refreshTokens RefreshToken[]
 
   // Audit fields
   createdAt     DateTime  @default(now())
@@ -173,4 +174,18 @@ enum SkillProgressStatus {
   AVAILABLE      // Can be started
   IN_PROGRESS    // Currently working on
   COMPLETED      // Successfully completed
+}
+
+// Refresh token model for JWT refresh functionality
+model RefreshToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([token], name: "idx_refresh_token")
+  @@index([userId], name: "idx_refresh_user")
+  @@map("refresh_tokens")
 }

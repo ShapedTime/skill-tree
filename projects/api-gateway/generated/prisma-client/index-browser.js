@@ -189,6 +189,14 @@ exports.Prisma.UserSkillProgressScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.RefreshTokenScalarFieldEnum = {
+  id: 'id',
+  token: 'token',
+  userId: 'userId',
+  expiresAt: 'expiresAt',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -236,7 +244,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   SkillTree: 'SkillTree',
   Skill: 'Skill',
-  UserSkillProgress: 'UserSkillProgress'
+  UserSkillProgress: 'UserSkillProgress',
+  RefreshToken: 'RefreshToken'
 };
 
 /**
