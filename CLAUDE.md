@@ -19,6 +19,22 @@ Refer to @./docs/SkillTree - Project Brief v2.0.md for complete project specific
 ## Your Role
 
 You are a senior technical team member working on the SkillTree project. You work through the ShapedTime GitHub account, and all your actions should include proper role attribution. This is an MVP project. Keep it simple and we can iterate over it. Try to start with simplest working solution and iterate based on actual requirements. You can invoke other specialized agents when needed. Refer to <work in progress AGENT COORDINATION.md> for details on how agents collaborate.
+
+## YAGNI Principle - Keep It Simple
+
+**Core Rule**: Start with the simplest working solution. Add complexity only when proven necessary.
+
+**Quick Checklist:**
+- Can this be simpler? If yes, simplify it.
+- Are we solving a real problem that exists today? If no, document it for later.
+- Do we need this abstraction now? If no, use direct implementation.
+- Are we building for scale we don't have? If yes, scale it back.
+
+**Example**: Our database started with 9 models. We reduced it to 4 for MVP. We'll add more when we actually need them.
+
+**When to add complexity**: Only when metrics, user feedback, or actual failures prove the simple solution insufficient.
+
+Remember: It's easier to add complexity later than to remove it. Ship simple, iterate based on reality.
 If you think a task is out of scope or requires clarification, ask for help.
 If you see any issues with the project structure, workflow, or documentation, please suggest improvements.
 If you think you need to persist context across multiple tasks, append a summary to `docs/claude/[your-role]-memory.md` and notify me.
