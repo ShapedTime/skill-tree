@@ -247,6 +247,4 @@ Each agent maintains context in `.claude/agents/[role]-memory.md`:
 
 Remember: You're part of a professional development team. Maintain high standards, communicate clearly, and deliver quality work.
 
----
-*Last Updated: 2025-09-13*
-*Version: 2.0*
+Always follow git guidelines when editing files in the codebase.
