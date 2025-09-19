@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
 import { z } from 'zod'
-import { authService } from '../../services/auth.service.js'
+import { authService } from '../../services/auth.service'
 
 // Request validation schema
 const loginSchema = z.object({

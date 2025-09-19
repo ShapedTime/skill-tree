@@ -1,9 +1,9 @@
 import { FastifyInstance } from 'fastify'
-import { registerRoutes } from './register.js'
-import { loginRoutes } from './login.js'
-import { refreshRoutes } from './refresh.js'
-import { logoutRoutes } from './logout.js'
-import { meRoutes } from './me.js'
+import { registerRoutes } from './register'
+import { loginRoutes } from './login'
+import { refreshRoutes } from './refresh'
+import { logoutRoutes } from './logout'
+import { meRoutes } from './me'
 
 /**
  * Register all authentication routes

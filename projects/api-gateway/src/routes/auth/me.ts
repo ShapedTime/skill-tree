@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify'
-import { authenticateToken } from '../../middleware/authenticate.js'
-import { authService } from '../../services/auth.service.js'
+import { authenticateToken } from '../../middleware/authenticate'
+import { authService } from '../../services/auth.service'
 
 export async function meRoutes(fastify: FastifyInstance) {
   fastify.get('/api/auth/me', {

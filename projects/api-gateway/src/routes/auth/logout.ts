@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify'
-import { authService } from '../../services/auth.service.js'
+import { authService } from '../../services/auth.service'
 
 export async function logoutRoutes(fastify: FastifyInstance) {
   fastify.post('/api/auth/logout', {
