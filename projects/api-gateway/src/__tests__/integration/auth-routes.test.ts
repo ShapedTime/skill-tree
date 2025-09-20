@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from '@jest/globals'
 import Fastify, { FastifyInstance } from 'fastify'
 import { authRoutes } from '../../routes/auth/index'
+import { prisma } from '../../database/utils'
 
 describe('Auth Routes Integration', () => {
   let server: FastifyInstance
 
   beforeAll(async () => {
-    // Set test environment variables
-    process.env.NODE_ENV = 'test'
-    process.env.JWT_SECRET = 'test-jwt-secret-key-for-testing-only'
-    process.env.JWT_REFRESH_SECRET = 'test-refresh-secret-key-for-testing-only'
-    process.env.DATABASE_URL = process.env.TEST_DATABASE_URL || 'postgresql://test:test@localhost:5432/skilltree_test'
+    // Clean up the test database before all tests
+    await prisma.refreshToken.deleteMany()
+    await prisma.userSkillProgress.deleteMany()
+    await prisma.user.deleteMany()
   })
 
   beforeEach(async () => {
@@ -21,6 +21,14 @@ describe('Auth Routes Integration', () => {
 
   afterEach(async () => {
     await server.close()
+  })
+
+  afterAll(async () => {
+    // Clean up the test database after all tests
+    await prisma.refreshToken.deleteMany()
+    await prisma.userSkillProgress.deleteMany()
+    await prisma.user.deleteMany()
+    await prisma.$disconnect()
   })
 
   describe('POST /api/auth/register', () => {

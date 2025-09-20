@@ -204,10 +204,18 @@ describe('AuthService Unit Tests (Mocked)', () => {
         email: 'test@example.com',
         username: 'testuser',
         passwordHash: 'should-not-be-included',
+        firstName: null,
+        lastName: null,
+        avatarUrl: null,
+        bio: null,
+        timezone: 'UTC',
+        totalXp: 0,
+        currentLevel: 1,
         isActive: true,
+        emailVerified: false,
+        lastLoginAt: null,
         createdAt: new Date(),
-        updatedAt: new Date(),
-        lastLoginAt: null
+        updatedAt: new Date()
       }
 
       const authUser = authService.userToAuthUser(user)

@@ -1,7 +1,18 @@
 import { PrismaClient } from '../../generated/prisma-client/index'
 
+// Ensure DATABASE_URL is set
+const databaseUrl = process.env.DATABASE_URL
+if (!databaseUrl) {
+  throw new Error('DATABASE_URL environment variable is not set')
+}
+
 export const prisma = new PrismaClient({
-  log: process.env.NODE_ENV === 'development' ? ['query', 'error'] : ['error']
+  log: process.env.NODE_ENV === 'development' ? ['query', 'error'] : ['error'],
+  datasources: {
+    db: {
+      url: databaseUrl
+    }
+  }
 })
 
 export async function validateSkillDependencies(skillId: string, dependencies: string[]): Promise<boolean> {
