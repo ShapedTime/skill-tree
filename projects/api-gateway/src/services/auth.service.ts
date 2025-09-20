@@ -224,6 +224,13 @@ export class AuthService {
       data: { lastLoginAt: new Date() }
     })
 
+    // Periodically clean up expired tokens (1% chance on login)
+    if (Math.random() < 0.01) {
+      this.cleanupExpiredTokens().catch(err =>
+        console.error('Token cleanup failed:', err)
+      )
+    }
+
     return user
   }
 
