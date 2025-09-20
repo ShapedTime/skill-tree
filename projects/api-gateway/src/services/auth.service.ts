@@ -45,7 +45,11 @@ export class AuthService {
    */
   generateTokens(userId: string): AuthTokens {
     const jwtSecret = process.env.JWT_SECRET!
-    const jwtRefreshSecret = process.env.JWT_REFRESH_SECRET || jwtSecret
+    const jwtRefreshSecret = process.env.JWT_REFRESH_SECRET
+
+    if (!jwtRefreshSecret) {
+      throw new Error('JWT_REFRESH_SECRET must be configured')
+    }
 
     const accessToken = jwt.sign(
       { userId, type: 'access' } as JWTPayload,
@@ -83,7 +87,11 @@ export class AuthService {
   async validateRefreshToken(token: string): Promise<User | null> {
     try {
       const jwtSecret = process.env.JWT_SECRET!
-      const jwtRefreshSecret = process.env.JWT_REFRESH_SECRET || jwtSecret
+      const jwtRefreshSecret = process.env.JWT_REFRESH_SECRET
+
+      if (!jwtRefreshSecret) {
+        throw new Error('JWT_REFRESH_SECRET must be configured')
+      }
 
       const payload = jwt.verify(token, jwtRefreshSecret) as JWTPayload
       if (payload.type !== 'refresh') {
