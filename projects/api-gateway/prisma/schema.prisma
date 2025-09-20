@@ -187,5 +187,6 @@ model RefreshToken {
 
   @@index([token], name: "idx_refresh_token")
   @@index([userId], name: "idx_refresh_user")
+  @@index([expiresAt], name: "idx_refresh_expires")
   @@map("refresh_tokens")
 }
