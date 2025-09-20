@@ -1,0 +1,100 @@
+version: '3.8'
+
+services:
+  # PostgreSQL for E2E testing (different port to avoid conflicts)
+  postgres-e2e:
+    image: postgres:15-alpine
+    container_name: skilltree-postgres-e2e
+    environment:
+      POSTGRES_USER: skilltree
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: skilltree_e2e
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_e2e_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U skilltree -d skilltree_e2e"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - skilltree-e2e
+
+  # Redis for E2E testing (different port to avoid conflicts)
+  redis-e2e:
+    image: redis:7-alpine
+    container_name: skilltree-redis-e2e
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    networks:
+      - skilltree-e2e
+
+  # API Gateway for E2E testing
+  api-gateway-e2e:
+    build:
+      context: ../../projects/api-gateway
+      dockerfile: Dockerfile
+    container_name: skilltree-api-e2e
+    environment:
+      NODE_ENV: test
+      PORT: 8000
+      DATABASE_URL: postgresql://skilltree:dev_password@postgres-e2e:5432/skilltree_e2e?schema=public
+      REDIS_URL: redis://redis-e2e:6379
+      JWT_SECRET: e2e_test_jwt_secret_key_for_testing_only
+      JWT_REFRESH_SECRET: e2e_test_jwt_refresh_secret_key_for_testing_only
+      CORS_ORIGIN: http://localhost:3001
+    ports:
+      - "8001:8000"
+    depends_on:
+      postgres-e2e:
+        condition: service_healthy
+      redis-e2e:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - skilltree-e2e
+    command: >
+      sh -c "
+        npx prisma db push --skip-generate &&
+        npm run start
+      "
+
+  # Frontend for E2E testing
+  web-app-e2e:
+    build:
+      context: ../../projects/web-app
+      dockerfile: Dockerfile
+    container_name: skilltree-web-e2e
+    environment:
+      VITE_API_URL: http://localhost:8001
+      NODE_ENV: test
+    ports:
+      - "3001:80"
+    depends_on:
+      api-gateway-e2e:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:80"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - skilltree-e2e
+
+networks:
+  skilltree-e2e:
+    driver: bridge
+
+volumes:
+  postgres_e2e_data:
+    driver: local
